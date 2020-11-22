@@ -18,14 +18,16 @@ from time import time
 log_level = getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper())
 logging.basicConfig(level=log_level)
 
-MODULES = ["fib_01", "fib_02"]
 N = int(1e300)
 REPEAT = int(1e4)
 
 
 def load_modules():
-    for module in MODULES:
-        yield module, import_module(module)
+    dirname = os.path.dirname(__file__)
+    for module in sorted(os.listdir(dirname)):
+        if module.startswith("fib_") and module.endswith(".py"):
+            module = module[:-3]  # No Python 3.9 on Repl.it yet (removesuffix)
+            yield module, import_module(module)
 
 
 def read_source_code(file_path):
