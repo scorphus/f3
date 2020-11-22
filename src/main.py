@@ -37,13 +37,13 @@ def gen_code_block(module, time_spent):
     file_base_name = os.path.basename(module.__file__)
     source_code = read_source_code(module.__file__)
     return f"""\n
-{{{{<highlight python>}}}}
+```python
 # {file_base_name}
 {module.header()}{source_code}
 
 
 # Time spent: {time_spent:0.6f}ms
-{{{{</highlight>}}}}
+```
 """
 
 
