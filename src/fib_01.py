@@ -8,10 +8,16 @@
 # https://opensource.org/licenses/BSD-3-Clause
 # Copyright (c) 2020, Pablo S. Blum de Aguiar <scorphus@gmail.com>
 
-from functools import lru_cache
+
+try:
+    from functools import cache
+except ImportError:
+    from functools import lru_cache
+
+    cache = lru_cache(maxsize=None)
 
 
-@lru_cache(maxsize=None)
+@cache
 def fib(n):
     return n if n < 2 else fib(n - 2) + fib(n - 1)
 
