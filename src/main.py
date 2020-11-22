@@ -13,7 +13,7 @@ import logging
 import os
 from importlib import import_module
 from statistics import median
-from time import time
+from time import perf_counter
 
 log_level = getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper())
 logging.basicConfig(level=log_level)
@@ -56,9 +56,9 @@ if __name__ == "__main__":
         gc.disable()
         for i in range(REPEAT):
             module.setup()
-            start = time()
+            start = perf_counter()
             module.even_fib_sum(N)
-            times[i] = time() - start
+            times[i] = perf_counter() - start
         gc.enable()
         time_spent = median(times) * 1e3
         code_blocks += gen_code_block(module, time_spent)
