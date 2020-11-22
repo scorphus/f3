@@ -8,17 +8,19 @@
 # https://opensource.org/licenses/BSD-3-Clause
 # Copyright (c) 2020, Pablo S. Blum de Aguiar <scorphus@gmail.com>
 
+import gc
 import logging
 import os
 from importlib import import_module
-from timeit import timeit
+from statistics import median
+from time import time
 
 log_level = getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper())
 logging.basicConfig(level=log_level)
 
 MODULES = ["fib_01", "fib_02"]
 N = int(1e300)
-TIMEIT_NUMBER = int(1e4)
+REPEAT = int(1e4)
 
 
 def load_modules():
@@ -48,13 +50,15 @@ def gen_code_block(module, time_spent):
 if __name__ == "__main__":
     code_blocks = ""
     for module_name, module in load_modules():
-        time_spent = timeit(
-            stmt=f"module.even_fib_sum({N})",
-            setup="module.setup()",
-            globals={"module": module},
-            number=TIMEIT_NUMBER,
-        )
-        time_spent = time_spent * 1e3 / TIMEIT_NUMBER
+        times = [0.0] * REPEAT
+        gc.disable()
+        for i in range(REPEAT):
+            module.setup()
+            start = time()
+            module.even_fib_sum(N)
+            times[i] = time() - start
+        gc.enable()
+        time_spent = median(times) * 1e3
         code_blocks += gen_code_block(module, time_spent)
         logging.info(
             "%s: %0.6f (%d)",
