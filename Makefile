@@ -33,18 +33,10 @@ flake8:
 lint: isort black flake8
 .PHONY: lint
 
-# run all even fibonacci sum in src/
+# fire the even fibonacci sums runner
 run:
-	@for even_fib_sum in src/*-*.py; do \
-		echo "\n\n⚡️⚡️⚡️ Running $$even_fib_sum ⚡️⚡️⚡️"; \
-		python $$even_fib_sum; \
-	done;
+	@python src/main.py
 .PHONY: run
-
-# run the specified even fibonacci sum (e.g.: make src/even_fib_sum_01.py)
-%.py: FORCE
-	@python $*.py
-FORCE:
 
 # clean python object, test and coverage files
 clean:

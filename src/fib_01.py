@@ -17,6 +17,15 @@ except ImportError:
     cache = lru_cache(maxsize=None)
 
 
+def setup():
+    fib.cache_clear()
+
+
+def header():
+    return "from functools import cache\n\n\n"
+
+
+# ---8<---
 @cache
 def fib(n):
     return n if n < 2 else fib(n - 2) + fib(n - 1)
