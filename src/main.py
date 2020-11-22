@@ -16,7 +16,7 @@ from timeit import timeit
 log_level = getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper())
 logging.basicConfig(level=log_level)
 
-MODULES = ["fib_01"]
+MODULES = ["fib_01", "fib_02"]
 N = int(1e300)
 TIMEIT_NUMBER = int(1e4)
 
