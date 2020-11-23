@@ -11,6 +11,10 @@
 from math import log, sqrt
 
 
+def repr():
+    return "Iterative using the golden ratio"
+
+
 def setup():
     pass
 

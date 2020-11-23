@@ -17,6 +17,10 @@ except ImportError:
     cache = lru_cache(maxsize=None)
 
 
+def repr():
+    return "Recursive"
+
+
 def setup():
     fib.cache_clear()
 

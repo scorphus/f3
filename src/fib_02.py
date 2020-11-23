@@ -19,6 +19,10 @@ except ImportError:
     cache = lru_cache(maxsize=None)
 
 
+def repr():
+    return "Recursive with iterator tools"
+
+
 def setup():
     fib.cache_clear()
 

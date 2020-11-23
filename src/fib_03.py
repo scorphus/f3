@@ -9,6 +9,10 @@
 # Copyright (c) 2020, Pablo S. Blum de Aguiar <scorphus@gmail.com>
 
 
+def repr():
+    return "Iterative"
+
+
 def setup():
     pass
 
