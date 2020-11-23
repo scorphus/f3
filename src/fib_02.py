@@ -33,7 +33,7 @@ def header():
 # ---8<---
 @cache
 def fib(n):
-    return n if n < 4 else fib(n - 2) + fib(n - 1)
+    return n if n < 2 else fib(n - 2) + fib(n - 1)
 
 
 def even_fib_sum(n):
